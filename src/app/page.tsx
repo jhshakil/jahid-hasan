@@ -5,10 +5,11 @@ import Experience from "@/components/Experience";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Project";
 import Skills from "@/components/Skills";
-import { getProfileData } from "@/services";
+import { getBlogData, getProfileData } from "@/services";
 
 const page = async () => {
   const profileData = await getProfileData();
+  const blogData = await getBlogData();
 
   return (
     <div>
@@ -17,7 +18,7 @@ const page = async () => {
       <Experience />
       <Projects />
       <Skills />
-      <Blog />
+      <Blog blogs={blogData?.data?.slice(0, 3)} />
       <Contact />
     </div>
   );

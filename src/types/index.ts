@@ -33,3 +33,32 @@ export type TExperience = {
   createdAt: string;
   updateAt: string;
 };
+
+export type TSkill = {
+  id: string;
+  name: string;
+  percentage: string;
+  color: string;
+  createdAt: string;
+  updateAt: string;
+};
+
+export type TProject = {
+  id: string;
+  title: string;
+  subTitle: string;
+  technology: string;
+  image: string;
+  description: string;
+  createdAt: string;
+  updateAt: string;
+};
+
+export type TBlog = {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  createdAt: string;
+  updateAt: string;
+};

@@ -11,7 +11,6 @@ import { TExperience } from "@/types";
 const Experience = async () => {
   const experienceData = await getExperienceData();
 
-  console.log(experienceData);
   return (
     <section id="experience" className="py-12">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">

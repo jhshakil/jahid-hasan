@@ -1,59 +1,46 @@
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TBlog } from "@/types";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
-const blogPosts = [
-  {
-    title: "Getting Started with Next.js",
-    date: "2023-06-15",
-    slug: "getting-started-with-nextjs",
-    excerpt:
-      "Learn how to set up your first Next.js project and understand its core concepts.",
-  },
-  {
-    title: "React Hooks Explained",
-    date: "2023-05-20",
-    slug: "react-hooks-explained",
-    excerpt:
-      "A deep dive into React Hooks and how they can simplify your React components.",
-  },
-  {
-    title: "Building Scalable APIs with Node.js",
-    date: "2023-04-10",
-    slug: "building-scalable-apis-with-nodejs",
-    excerpt:
-      "Learn best practices for creating robust and scalable APIs using Node.js and Express.",
-  },
-];
+type Props = {
+  blogs: TBlog[];
+};
 
-export default function Blog() {
+const Blog = async ({ blogs }: Props) => {
   return (
     <div className="container max-w-screen-xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-8">
         Blog
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {blogPosts.map((post, index) => (
-          <Card key={index}>
+        {blogs.map((post: TBlog) => (
+          <Card key={post.id}>
             <CardHeader>
               <CardTitle>
-                <Link href={`/blog/${post.slug}`} className="hover:underline">
+                <Link href={`/blog/${post.id}`} className="hover:underline">
                   {post.title}
                 </Link>
               </CardTitle>
-              <CardDescription>{post.date}</CardDescription>
+              {/* <CardDescription>{post.date}</CardDescription> */}
             </CardHeader>
             <CardContent>
-              <p>{post.excerpt}</p>
+              <p className="line-clamp-3">{post.description}</p>
+              <div className="mt-4">
+                <Link
+                  href={`/blog/${post.id}`}
+                  className={cn(buttonVariants())}
+                >
+                  See Details
+                </Link>
+              </div>
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default Blog;
