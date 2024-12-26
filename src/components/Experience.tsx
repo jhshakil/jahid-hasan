@@ -5,44 +5,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getExperienceData } from "@/services";
+import { TExperience } from "@/types";
 
-const experiences = [
-  {
-    title: "Senior Full Stack Developer",
-    company: "Tech Innovators Inc.",
-    period: "Jan 2021 - Present",
-    description:
-      "Lead developer for multiple high-traffic web applications. Implemented microservices architecture and improved overall system performance by 40%.",
-  },
-  {
-    title: "Full Stack Developer",
-    company: "WebSolutions Co.",
-    period: "Mar 2018 - Dec 2020",
-    description:
-      "Developed and maintained various client projects using React, Node.js, and PostgreSQL. Implemented CI/CD pipelines and reduced deployment time by 60%.",
-  },
-  {
-    title: "Junior Web Developer",
-    company: "StartUp Ventures",
-    period: "Jun 2016 - Feb 2018",
-    description:
-      "Assisted in the development of the company's main product. Gained extensive experience in front-end technologies and agile methodologies.",
-  },
-];
+const Experience = async () => {
+  const experienceData = await getExperienceData();
 
-export default function Experience() {
+  console.log(experienceData);
   return (
     <section id="experience" className="py-12">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
         Experience
       </h2>
-      <div className="space-y-6">
-        {experiences.map((exp, index) => (
-          <Card key={index}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {experienceData?.data?.map((exp: TExperience) => (
+          <Card key={exp.id}>
             <CardHeader>
-              <CardTitle>{exp.title}</CardTitle>
+              <CardTitle>{exp.designation}</CardTitle>
               <CardDescription>
-                {exp.company} | {exp.period}
+                {exp.companyName} | {exp.duration}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -53,4 +34,6 @@ export default function Experience() {
       </div>
     </section>
   );
-}
+};
+
+export default Experience;

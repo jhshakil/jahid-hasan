@@ -1,26 +1,23 @@
-"use client";
-
-import * as React from "react";
 import Link from "next/link";
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="mr-4 hidden md:flex">
+      <div className="container flex h-20 max-w-screen-2xl items-center">
+        <div className="gap-11 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">John Doe</span>
+            <span className="hidden font-bold sm:inline-block text-3xl">
+              Jahid Hasan
+            </span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <nav className="flex items-center space-x-6 font-medium text-xl">
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
-            <Link href="#about">About</Link>
-            <Link href="#experience">Experience</Link>
-            <Link href="#projects">Projects</Link>
-            <Link href="#contact">Contact</Link>
           </nav>
         </div>
       </div>
     </header>
   );
-}
+};
+
+export default Header;
