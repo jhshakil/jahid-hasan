@@ -1,10 +1,10 @@
 import { getBlogDetails } from "@/services";
 import { notFound } from "next/navigation";
 
+// export const dynamic = "force-dynamic";
+
 const page = async ({ params }: { params: { slug: string } }) => {
   const post = await getBlogDetails(params.slug);
-
-  console.log(post);
 
   if (!post) {
     notFound();

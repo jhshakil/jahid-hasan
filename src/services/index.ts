@@ -2,17 +2,15 @@
 
 import { envConfig } from "@/config/envConfig";
 import { toast } from "sonner";
+import nexiosInstance from "../../nexios.config";
 
 export const getProfileData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["profiles"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/profile`, fetchOption);
+    const res = await nexiosInstance.get(`${envConfig.baseUrl}/profile`, {
+      cache: "no-store",
+    });
 
-    return res.json();
+    return res;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -21,12 +19,7 @@ export const getProfileData = async () => {
 
 export const getExperienceData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["experiences"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/experience`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/experience`);
 
     return res.json();
   } catch (error) {
@@ -37,12 +30,7 @@ export const getExperienceData = async () => {
 
 export const getProjectData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["projects"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/project`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/project`);
 
     return res.json();
   } catch (error) {
@@ -53,12 +41,7 @@ export const getProjectData = async () => {
 
 export const getSocialData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["socials"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/social`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/social`);
 
     return res.json();
   } catch (error) {
@@ -69,12 +52,7 @@ export const getSocialData = async () => {
 
 export const getSkillData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["skills"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/skill`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/skill`);
 
     return res.json();
   } catch (error) {
@@ -85,12 +63,7 @@ export const getSkillData = async () => {
 
 export const getBlogData = async () => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["blogs"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/blog`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/blog`);
 
     return res.json();
   } catch (error) {
@@ -101,12 +74,7 @@ export const getBlogData = async () => {
 
 export const getBlogDetails = async (id: string) => {
   try {
-    const fetchOption = {
-      next: {
-        tags: ["blog"],
-      },
-    };
-    const res = await fetch(`${envConfig.baseUrl}/blog/${id}`, fetchOption);
+    const res = await fetch(`${envConfig.baseUrl}/blog/${id}`);
 
     return res.json();
   } catch (error) {

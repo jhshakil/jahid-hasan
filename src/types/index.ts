@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type TProfile = {
   id: string;
   name: string;
@@ -61,4 +62,12 @@ export type TBlog = {
   description: string;
   createdAt: string;
   updateAt: string;
+};
+
+export type IResponse<T> = {
+  success: boolean;
+  message: string;
+  data?: T;
+  error?: any;
+  meta?: any;
 };

@@ -1,8 +1,6 @@
 import Blog from "@/components/Blog";
 import { getBlogData } from "@/services";
 
-import React from "react";
-
 const page = async () => {
   const blogData = await getBlogData();
   return (
