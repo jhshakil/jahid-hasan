@@ -5,7 +5,12 @@ import { toast } from "sonner";
 
 export const getProfileData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/profile`);
+    const fetchOption = {
+      next: {
+        tags: ["profiles"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/profile`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -16,7 +21,12 @@ export const getProfileData = async () => {
 
 export const getExperienceData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/experience`);
+    const fetchOption = {
+      next: {
+        tags: ["experiences"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/experience`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -27,7 +37,12 @@ export const getExperienceData = async () => {
 
 export const getProjectData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/project`);
+    const fetchOption = {
+      next: {
+        tags: ["projects"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/project`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -38,7 +53,12 @@ export const getProjectData = async () => {
 
 export const getSocialData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/social`);
+    const fetchOption = {
+      next: {
+        tags: ["socials"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/social`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -49,7 +69,12 @@ export const getSocialData = async () => {
 
 export const getSkillData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/skill`);
+    const fetchOption = {
+      next: {
+        tags: ["skills"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/skill`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -60,7 +85,12 @@ export const getSkillData = async () => {
 
 export const getBlogData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/blog`);
+    const fetchOption = {
+      next: {
+        tags: ["blogs"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/blog`, fetchOption);
 
     return res.json();
   } catch (error) {
@@ -71,7 +101,12 @@ export const getBlogData = async () => {
 
 export const getBlogDetails = async (id: string) => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/blog/${id}`);
+    const fetchOption = {
+      next: {
+        tags: ["blog"],
+      },
+    };
+    const res = await fetch(`${envConfig.baseUrl}/blog/${id}`, fetchOption);
 
     return res.json();
   } catch (error) {
