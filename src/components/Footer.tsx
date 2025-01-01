@@ -23,7 +23,7 @@ const Footer = async () => {
             socialData?.data?.map((social: TSocial) => (
               <Link
                 key={social.id}
-                href={social.url}
+                href={social?.url || "#"}
                 target="_blank"
                 rel="noreferrer"
               >

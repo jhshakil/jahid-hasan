@@ -44,7 +44,7 @@ const Project = async () => {
             <CardFooter>
               <Button asChild>
                 <Link
-                  href={project.subTitle}
+                  href={project?.subTitle || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
