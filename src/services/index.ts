@@ -3,14 +3,25 @@
 import { envConfig } from "@/config/envConfig";
 import { toast } from "sonner";
 import nexiosInstance from "../../nexios.config";
+import { NexiosResponse } from "nexios-http/types/interfaces";
+import {
+  IResponse,
+  TBlog,
+  TExperience,
+  TProfile,
+  TProject,
+  TSkill,
+  TSocial,
+} from "@/types";
 
 export const getProfileData = async () => {
   try {
-    const res = await nexiosInstance.get(`${envConfig.baseUrl}/profile`, {
-      cache: "no-store",
-    });
+    const { data }: NexiosResponse<IResponse<TProfile[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/profile`, {
+        cache: "no-store",
+      });
 
-    return res;
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -19,9 +30,12 @@ export const getProfileData = async () => {
 
 export const getExperienceData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/experience`);
+    const { data }: NexiosResponse<IResponse<TExperience[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/experience`, {
+        cache: "no-store",
+      });
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -30,9 +44,12 @@ export const getExperienceData = async () => {
 
 export const getProjectData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/project`);
+    const { data }: NexiosResponse<IResponse<TProject[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/social`, {
+        cache: "no-store",
+      });
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -41,9 +58,12 @@ export const getProjectData = async () => {
 
 export const getSocialData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/social`);
+    const { data }: NexiosResponse<IResponse<TSocial[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/social`, {
+        cache: "no-store",
+      });
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -52,9 +72,12 @@ export const getSocialData = async () => {
 
 export const getSkillData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/skill`);
+    const { data }: NexiosResponse<IResponse<TSkill[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/skill`, {
+        cache: "no-store",
+      });
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -63,9 +86,12 @@ export const getSkillData = async () => {
 
 export const getBlogData = async () => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/blog`);
+    const { data }: NexiosResponse<IResponse<TBlog[]>> =
+      await nexiosInstance.get(`${envConfig.baseUrl}/blog`, {
+        cache: "no-store",
+      });
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);
@@ -74,9 +100,14 @@ export const getBlogData = async () => {
 
 export const getBlogDetails = async (id: string) => {
   try {
-    const res = await fetch(`${envConfig.baseUrl}/blog/${id}`);
+    const { data }: NexiosResponse<IResponse<TBlog>> = await nexiosInstance.get(
+      `${envConfig.baseUrl}/blog/${id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
-    return res.json();
+    return data;
   } catch (error) {
     toast("something went wrong");
     console.log(error);

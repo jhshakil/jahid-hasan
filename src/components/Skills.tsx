@@ -1,9 +1,14 @@
 import { Badge } from "@/components/ui/badge";
-import { getSkillData } from "@/services";
-import { TSkill } from "@/types";
+import { envConfig } from "@/config/envConfig";
+import { IResponse, TSkill } from "@/types";
+import { NexiosResponse } from "nexios-http/types/interfaces";
+import nexiosInstance from "../../nexios.config";
 
 const Skills = async () => {
-  const skillData = await getSkillData();
+  const { data: skillData }: NexiosResponse<IResponse<TSkill[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/skill`, {
+      cache: "no-store",
+    });
 
   return (
     <section id="skills" className="py-12">

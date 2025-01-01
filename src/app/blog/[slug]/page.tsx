@@ -1,12 +1,18 @@
-import { getBlogDetails } from "@/services";
+import { IResponse, TBlog } from "@/types";
+import { NexiosResponse } from "nexios-http/types/interfaces";
 import { notFound } from "next/navigation";
+import nexiosInstance from "../../../../nexios.config";
+import { envConfig } from "@/config/envConfig";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const post = await getBlogDetails(params.slug);
+  const { data: post }: NexiosResponse<IResponse<TBlog>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/blog/${params.slug}`, {
+      cache: "no-store",
+    });
 
-  if (!post) {
+  if (!post?.data) {
     notFound();
   }
 

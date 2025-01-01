@@ -9,11 +9,16 @@ import {
 // import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { getProjectData } from "@/services";
-import { TProject } from "@/types";
+import { IResponse, TProject } from "@/types";
+import { NexiosResponse } from "nexios-http/types/interfaces";
+import nexiosInstance from "../../nexios.config";
+import { envConfig } from "@/config/envConfig";
 
 const Project = async () => {
-  const projectData = await getProjectData();
+  const { data: projectData }: NexiosResponse<IResponse<TProject[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/experience`, {
+      cache: "no-store",
+    });
   return (
     <section id="projects" className="py-12">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">

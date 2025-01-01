@@ -1,9 +1,14 @@
-import { getSocialData } from "@/services";
-import { TSocial } from "@/types";
+import { IResponse, TSocial } from "@/types";
+import { NexiosResponse } from "nexios-http/types/interfaces";
 import Link from "next/link";
+import nexiosInstance from "../../nexios.config";
+import { envConfig } from "@/config/envConfig";
 
 const Footer = async () => {
-  const socialData = await getSocialData();
+  const { data: socialData }: NexiosResponse<IResponse<TSocial[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/experience`, {
+      cache: "no-store",
+    });
 
   return (
     <footer className="border-t">
@@ -14,16 +19,17 @@ const Footer = async () => {
           </p>
         </div>
         <div className="flex gap-4">
-          {socialData?.data.map((social: TSocial) => (
-            <Link
-              key={social.id}
-              href={social.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span>{social.name}</span>
-            </Link>
-          ))}
+          {socialData &&
+            socialData?.data?.map((social: TSocial) => (
+              <Link
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>{social.name}</span>
+              </Link>
+            ))}
         </div>
       </div>
     </footer>

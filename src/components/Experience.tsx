@@ -5,11 +5,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getExperienceData } from "@/services";
-import { TExperience } from "@/types";
+import { envConfig } from "@/config/envConfig";
+import { IResponse, TExperience } from "@/types";
+import { NexiosResponse } from "nexios-http/types/interfaces";
+import nexiosInstance from "../../nexios.config";
 
 const Experience = async () => {
-  const experienceData = await getExperienceData();
+  const { data: experienceData }: NexiosResponse<IResponse<TExperience[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/experience`, {
+      cache: "no-store",
+    });
 
   return (
     <section id="experience" className="py-12">
