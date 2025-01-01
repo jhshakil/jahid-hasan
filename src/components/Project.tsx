@@ -20,7 +20,6 @@ const Project = async () => {
       cache: "no-store",
     });
 
-  console.log(projectData);
   return (
     <section id="projects" className="py-12">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
