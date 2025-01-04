@@ -1,25 +1,26 @@
-import { Badge } from "@/components/ui/badge";
-import { envConfig } from "@/config/envConfig";
-import { IResponse, TSkill } from "@/types";
-import { NexiosResponse } from "nexios-http/types/interfaces";
-import nexiosInstance from "../../nexios.config";
+import { Progress } from "@/components/ui/progress";
+import { TSkill } from "@/types";
 
-const Skills = async () => {
-  const { data: skillData }: NexiosResponse<IResponse<TSkill[]>> =
-    await nexiosInstance.get(`${envConfig.baseUrl}/skill`, {
-      cache: "no-store",
-    });
+type Props = {
+  skillData: TSkill[];
+};
 
+const Skills = ({ skillData }: Props) => {
   return (
-    <section id="skills" className="py-12">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
-        Skills
-      </h2>
-      <div className="flex flex-wrap gap-2">
-        {skillData?.data?.map((skill: TSkill) => (
-          <Badge key={skill.id} variant="outline">
-            {skill.name}
-          </Badge>
+    <section className="py-20">
+      <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
+      <div className="grid md:grid-cols-2 gap-8">
+        {skillData.map((skill) => (
+          <div key={skill.id}>
+            <div className="flex justify-between mb-2">
+              <span className="font-medium">{skill.name}</span>
+              <span className="text-gray-400">{skill.percentage}%</span>
+            </div>
+            <Progress
+              value={Number(skill.percentage)}
+              className="h-2 bg-white"
+            />
+          </div>
         ))}
       </div>
     </section>

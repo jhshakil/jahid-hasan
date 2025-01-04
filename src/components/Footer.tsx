@@ -1,36 +1,53 @@
-import { IResponse, TSocial } from "@/types";
-import { NexiosResponse } from "nexios-http/types/interfaces";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import nexiosInstance from "../../nexios.config";
-import { envConfig } from "@/config/envConfig";
 
-const Footer = async () => {
-  const { data: socialData }: NexiosResponse<IResponse<TSocial[]>> =
-    await nexiosInstance.get(`${envConfig.baseUrl}/experience`, {
-      cache: "no-store",
-    });
-
+const Footer = () => {
   return (
-    <footer className="border-t">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <p className="text-center text-2xl font-bold leading-loose md:text-left">
-            Jahid Hasan
-          </p>
+    <footer className="w-full bg-[#1B2631] py-12 text-gray-200">
+      <div className="container mx-auto flex flex-col items-center justify-center space-y-4">
+        <h2 className="text-3xl font-semibold">Jahid Hasan</h2>
+
+        <nav className="flex space-x-6 text-base">
+          <Link href="/about" className="transition-colors hover:text-blue-400">
+            About
+          </Link>
+          <Link
+            href="/projects"
+            className="transition-colors hover:text-blue-400"
+          >
+            Projects
+          </Link>
+        </nav>
+
+        <div className="flex space-x-4">
+          <Link
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-blue-400"
+          >
+            <Github className="h-5 w-5" />
+            <span className="sr-only">GitHub</span>
+          </Link>
+          <Link
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-blue-400"
+          >
+            <Linkedin className="h-5 w-5" />
+            <span className="sr-only">LinkedIn</span>
+          </Link>
+          <Link
+            href="mailto:example@email.com"
+            className="transition-colors hover:text-blue-400"
+          >
+            <Mail className="h-5 w-5" />
+            <span className="sr-only">Email</span>
+          </Link>
         </div>
-        <div className="flex gap-4">
-          {socialData &&
-            socialData?.data?.map((social: TSocial) => (
-              <Link
-                key={social.id}
-                href={social?.url || "#"}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>{social.name}</span>
-              </Link>
-            ))}
-        </div>
+
+        <p className="text-sm text-gray-400">© Jahid. All rights reserved</p>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Project";
-import { IResponse, TBlog, TProfile } from "@/types";
+import { IResponse, TBlog, TProfile, TSkill, TSocial } from "@/types";
 import { NexiosResponse } from "nexios-http/types/interfaces";
 import nexiosInstance from "../../nexios.config";
 import { envConfig } from "@/config/envConfig";
@@ -21,13 +21,28 @@ const page = async () => {
       cache: "no-store",
     });
 
+  const { data: socialData }: NexiosResponse<IResponse<TSocial[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/social`, {
+      cache: "no-store",
+    });
+
+  const { data: skillData }: NexiosResponse<IResponse<TSkill[]>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/skill`, {
+      cache: "no-store",
+    });
+
   return (
     <div>
-      {profileData?.data && <Hero profileData={profileData?.data[0]} />}
+      {profileData?.data && (
+        <Hero
+          profileData={profileData?.data[0]}
+          social={socialData?.data as TSocial[]}
+        />
+      )}
       {profileData?.data && <About about={profileData?.data[0]?.about} />}
       <Experience />
+      <Skills skillData={skillData?.data as TSkill[]} />
       <Projects />
-      <Skills />
       {blogData?.data && <Blog blogs={blogData?.data?.slice(0, 3)} />}
 
       <Contact />

@@ -1,41 +1,41 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
-import { TProfile } from "@/types";
+import { TProfile, TSocial } from "@/types";
+import Link from "next/link";
 
 type Props = {
   profileData: TProfile;
+  social: TSocial[];
 };
 
-const Hero = ({ profileData }: Props) => {
-  const { name, designation, resumeLink, image } = profileData;
+const Hero = ({ profileData, social }: Props) => {
+  const { name, designation, image } = profileData;
+
   return (
-    <section className="py-24 flex flex-col md:flex-row items-center justify-between">
-      <div className="md:w-1/2 text-center md:text-left">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-          {name}
-        </h1>
-        <p className="mt-4 text-xl text-muted-foreground max-w-[700px]">
-          {designation}
-        </p>
-        <div className="mt-8">
-          <Button asChild className="mr-4">
-            <Link href={resumeLink || "#"} target="_blank">
-              Get My Resume
-            </Link>
-          </Button>
-        </div>
-      </div>
-      <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+    <header className="text-center py-20">
+      <div className="relative w-60 h-60 mx-auto mb-6">
         <Image
           src={image}
-          alt="John Doe"
-          width={300}
-          height={300}
-          className="rounded-full"
+          alt="Profile"
+          fill
+          className="rounded-full border-4 border-blue-500 object-cover"
         />
       </div>
-    </section>
+      <h1 className="text-3xl font-bold mb-2">Hello, I&apos;m {name}</h1>
+      <p className="text-xl text-gray-400 mb-6">{designation}</p>
+      <div className="flex justify-center space-x-4">
+        {social?.map((social: TSocial) => (
+          <Link
+            key={social.id}
+            href={social?.url || "#"}
+            target="_blank"
+            rel="noreferrer"
+            className=" hover:text-blue-500"
+          >
+            <span>{social.name}</span>
+          </Link>
+        ))}
+      </div>
+    </header>
   );
 };
 
