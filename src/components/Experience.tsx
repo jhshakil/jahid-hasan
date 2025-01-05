@@ -1,7 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { TExperience } from "@/types";
 import { Calendar, MapPin } from "lucide-react";
 
-const Experience = () => {
+type Props = {
+  experienceData: TExperience[];
+};
+
+const Experience = ({ experienceData }: Props) => {
   return (
     <section className="py-20" id="experience">
       <h2 className="text-3xl font-bold mb-12 text-center">

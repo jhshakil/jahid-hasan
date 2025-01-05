@@ -17,7 +17,7 @@ const Contact = () => {
 
   return (
     <section className="py-20" id="contact">
-      <h2 className="text-2xl font-bold mb-8 text-center">Get In Touch</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
       <div className="max-w-xl mx-auto">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">

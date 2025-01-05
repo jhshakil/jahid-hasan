@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { Card, CardContent } from "./ui/card";
+import { TProfile } from "@/types";
 
 type Props = {
-  about: string;
+  profileData: TProfile;
 };
 
-const About = ({ about }: Props) => {
+const About = ({ profileData }: Props) => {
   return (
     <section className="py-20" id="about">
       <h2 className="text-3xl font-bold mb-8 text-center">ABOUT ME</h2>
@@ -16,11 +17,11 @@ const About = ({ about }: Props) => {
               <h3 className="text-xl font-bold mb-4">
                 I Develop System That Work
               </h3>
-              <p className="text-gray-400 mb-4">{about}</p>
+              <p className="text-gray-400 mb-4">{profileData.about}</p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="font-bold">Name:</p>
-                  <p className="text-gray-400">Manuel Wilson</p>
+                  <p className="text-gray-400">{profileData.name}</p>
                 </div>
                 <div>
                   <p className="font-bold">Email:</p>

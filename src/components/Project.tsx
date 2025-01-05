@@ -9,7 +9,7 @@ type Props = {
 const Project = async ({ projects }: Props) => {
   return (
     <section className="py-20" id="project">
-      <h2 className="text-2xl font-bold mb-8 text-center">PORTFOLIO</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">PORTFOLIO</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects?.map((project, index) => (
           <Card

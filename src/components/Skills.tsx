@@ -10,7 +10,7 @@ const Skills = ({ skillData }: Props) => {
     <section className="py-20" id="skill">
       <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
       <div className="grid md:grid-cols-2 gap-8">
-        {skillData.map((skill) => (
+        {skillData?.map((skill) => (
           <div key={skill.id}>
             <div className="flex justify-between mb-2">
               <span className="font-medium">{skill.name}</span>
