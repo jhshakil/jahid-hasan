@@ -3,7 +3,7 @@ import { Calendar, MapPin } from "lucide-react";
 
 const Experience = () => {
   return (
-    <section className="py-20">
+    <section className="py-20" id="experience">
       <h2 className="text-3xl font-bold mb-12 text-center">
         Professional Experience
       </h2>

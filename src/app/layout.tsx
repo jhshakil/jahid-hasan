@@ -42,7 +42,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header resume={profileData?.data?.[0]?.resumeLink as string} />
-        <div className="container max-w-screen-xl mx-auto px-4 flex flex-col min-h-screen">
+        <div className="container max-w-screen-xl flex flex-col min-h-screen">
           <main className="flex-grow">{children}</main>
         </div>
         <Footer />

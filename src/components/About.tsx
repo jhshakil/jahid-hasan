@@ -7,7 +7,7 @@ type Props = {
 
 const About = ({ about }: Props) => {
   return (
-    <section className="py-20">
+    <section className="py-20" id="about">
       <h2 className="text-3xl font-bold mb-8 text-center">ABOUT ME</h2>
       <Card className="bg-[#232730] border-none">
         <CardContent className="p-6">
