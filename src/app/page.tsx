@@ -33,7 +33,7 @@ const page = async () => {
       <Skills skillData={fullHomeData?.data?.skills} />
       <Projects projects={fullHomeData?.data?.projects} />
       <Blog blogs={fullHomeData?.data?.blogs} />
-      <Contact />
+      <Contact profileData={fullHomeData?.data?.profile} />
     </div>
   );
 };
