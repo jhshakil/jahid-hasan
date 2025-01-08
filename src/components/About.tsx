@@ -16,7 +16,7 @@ const About = ({ profileData }: Props) => {
             <div>
               <p className="text-gray-400 mb-4">{about}</p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="font-bold">Name:</p>
                 <p className="text-gray-400">{name}</p>
