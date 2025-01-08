@@ -47,7 +47,7 @@ export type TSkill = {
 export type TProject = {
   id: string;
   title: string;
-  subTitle: string;
+  link: string;
   technology: string;
   image: string;
   description: string;
@@ -58,6 +58,7 @@ export type TProject = {
 export type TBlog = {
   id: string;
   title: string;
+  slug: string;
   image: string;
   description: string;
   createdAt: string;

@@ -34,13 +34,9 @@ const Header = ({ resume }: Props) => {
       setPathWithHash(window.location.pathname + window.location.hash);
     };
 
-    // Set the initial path with hash
     handleHashChange();
 
-    // Listen for hash changes
     window.addEventListener("hashchange", handleHashChange);
-
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };

@@ -5,8 +5,8 @@ import nexiosInstance from "../../../../nexios.config";
 import { envConfig } from "@/config/envConfig";
 import Image from "next/image";
 import { Calendar } from "lucide-react";
-import { blogPosts } from "@/components/Blog";
 import { Metadata } from "next";
+import { format } from "date-fns";
 
 interface BlogPostPageProps {
   params: {
@@ -17,77 +17,53 @@ interface BlogPostPageProps {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = blogPosts.find((post) => post.slug === params.slug);
+  const { data: post }: NexiosResponse<IResponse<TBlog>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/blog/${params.slug}`, {
+      cache: "no-store",
+    });
 
-  if (!post) {
+  if (!post?.data) {
     return {
       title: "Post Not Found",
     };
   }
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.data?.title,
+    description: post.data?.description.slice(0, 10),
   };
 }
 
 const page = async ({ params }: BlogPostPageProps) => {
-  // const { data: post }: NexiosResponse<IResponse<TBlog>> =
-  //   await nexiosInstance.get(`${envConfig.baseUrl}/blog/${params.slug}`, {
-  //     cache: "no-store",
-  //   });
+  const { data: post }: NexiosResponse<IResponse<TBlog>> =
+    await nexiosInstance.get(`${envConfig.baseUrl}/blog/${params.slug}`, {
+      cache: "no-store",
+    });
 
-  const post = blogPosts.find((post) => post.slug === params.slug);
-
-  if (!post) {
+  if (!post?.data) {
     notFound();
   }
 
-  // if (!post?.data) {
-  //   notFound();
-  // }
+  const { title, image, description, createdAt } = post.data || {};
 
   return (
     <div className="container mx-auto px-4 py-20">
       <article className="max-w-3xl mx-auto">
         <div className="relative h-[400px] mb-8">
           <Image
-            src={post.image}
-            alt={post.title}
+            src={image}
+            alt={title}
             fill
             className="object-cover rounded-lg"
           />
         </div>
         <div className="flex items-center text-sm text-gray-400 mb-6">
           <Calendar className="w-4 h-4 mr-2" />
-          {post.date}
+          {format(createdAt, "yyyy-MM-dd")}
         </div>
-        <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
+        <h1 className="text-4xl font-bold mb-6">{title}</h1>
         <div className="prose prose-invert max-w-none prose-pre:bg-[#232730] prose-pre:border prose-pre:border-gray-800">
-          {post.content.split("\n").map((paragraph, index) => {
-            if (paragraph.startsWith("#")) {
-              const level = paragraph.match(/^#+/)?.[0].length;
-              const text = paragraph.replace(/^#+\s/, "");
-              const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
-              return <HeadingTag key={index}>{text}</HeadingTag>;
-            }
-            if (paragraph.startsWith("-")) {
-              return (
-                <ul key={index}>
-                  <li>{paragraph.replace("- ", "")}</li>
-                </ul>
-              );
-            }
-            if (paragraph.startsWith("```")) {
-              const code = paragraph.replace(/```\w+\n/, "").replace(/```/, "");
-              return (
-                <pre key={index}>
-                  <code>{code}</code>
-                </pre>
-              );
-            }
-            return <p key={index}>{paragraph}</p>;
-          })}
+          <p>{description}</p>
         </div>
       </article>
     </div>

@@ -39,6 +39,7 @@ type Props = {
 };
 
 const Contact = ({ profileData }: Props) => {
+  const { email, address, phoneNumber } = profileData || {};
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -50,12 +51,11 @@ const Contact = ({ profileData }: Props) => {
   });
 
   function onSubmit(data: ContactFormValues) {
-    // Add your form submission logic here
     console.log(data);
   }
 
   return (
-    <section className="w-full px-4 py-16 text-gray-200 md:py-24">
+    <section className="w-full px-4 py-16 text-gray-200 md:py-24" id="contact">
       <div className="container mx-auto max-w-6xl">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Left Column - Contact Information */}
@@ -78,10 +78,10 @@ const Contact = ({ profileData }: Props) => {
                 <div>
                   <span className="text-sm font-light">Email:</span>
                   <a
-                    href={`mailto:${profileData.email}`}
+                    href={`mailto:${email}`}
                     className="ml-2 text-sm text-gray-400 hover:text-blue-400"
                   >
-                    {profileData.email}
+                    {email}
                   </a>
                 </div>
               </div>
@@ -90,9 +90,7 @@ const Contact = ({ profileData }: Props) => {
                 <MapPin className="h-5 w-5 text-gray-400" />
                 <div>
                   <span className="text-sm font-light">Address:</span>
-                  <span className="ml-2 text-sm text-gray-400">
-                    {profileData.address}
-                  </span>
+                  <span className="ml-2 text-sm text-gray-400">{address}</span>
                 </div>
               </div>
 
@@ -101,7 +99,7 @@ const Contact = ({ profileData }: Props) => {
                 <div>
                   <span className="text-sm font-light">Mobile:</span>
                   <span className="ml-2 text-sm text-gray-400">
-                    {profileData.phoneNumber}
+                    {phoneNumber}
                   </span>
                 </div>
               </div>

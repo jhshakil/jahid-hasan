@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Hero = ({ profileData, social }: Props) => {
-  const { name, designation, image } = profileData;
+  const { name, designation, image } = profileData || {};
 
   return (
     <header className="text-center py-20">
