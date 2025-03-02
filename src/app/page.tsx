@@ -5,7 +5,7 @@ import { envConfig } from "@/config/envConfig";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
-import Blog from "@/components/Blog";
+// import Blog from "@/components/Blog";
 import { NexiosResponse } from "nexios-http/types/interfaces";
 import {
   IResponse,
