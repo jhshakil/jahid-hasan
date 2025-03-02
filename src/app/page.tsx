@@ -47,7 +47,7 @@ const page = async () => {
       />
       <Skills skillData={fullHomeData?.data?.skills as TSkill[]} />
       <Projects projects={fullHomeData?.data?.projects as TProject[]} />
-      <Blog blogs={fullHomeData?.data?.blogs as TBlog[]} />
+      {/* <Blog blogs={fullHomeData?.data?.blogs as TBlog[]} /> */}
       <Contact profileData={fullHomeData?.data?.profile as TProfile} />
     </div>
   );
