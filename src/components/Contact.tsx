@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { TProfile } from "@/types";
+import { envConfig } from "@/config/envConfig";
+import { toast } from "sonner";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, {
@@ -52,6 +54,27 @@ const Contact = ({ profileData }: Props) => {
 
   function onSubmit(data: ContactFormValues) {
     console.log(data);
+
+    fetch(`${envConfig.baseUrl}/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then(() => {
+        toast("Email Send");
+        form.reset();
+      })
+      .catch(() => {
+        toast("Fail to send email");
+      });
   }
 
   return (
